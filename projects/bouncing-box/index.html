@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Bouncing Box</title>
+	<script src="jquery.min.js"></script>
+
+<!-- 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script> -->
+
+	<!-- BEGIN CSS -->
+	<style>
+		/* TODO 1 */
+		.box {
+			width: 100px;
+			height: 100px;
+			background-color: pink;
+			font-size: 300%;
+			text-align: bottom;
+			display: block;
+			position: absolute;
+			top: 100px;
+			left: 0px;
+		}
+		body {
+  background-image: url("https://vignette.wikia.nocookie.net/disney/images/0/03/Profile_-_Winnie_the_Pooh.png/revision/latest?cb=20190315134345");
+  background-color: #cccccc;
+}
+
+		
+	</style>
+
+</head>
+<body class="board">
+	<!-- HTML for the box -->
+	<div class="box">?</div>
+
+	<!-- BEGIN JAVASCRIPT -->
+	<script>
+		(function(){
+			'use strict';
+			/* global jQuery */
+
+			// jQuery stuff setup for you
+			var box = jQuery('.box');
+			var boardWidth = jQuery('.board').width();
+	
+			// TODO 2 - Variable declarations 
+			var position = 0;
+			var points = 0;
+			var speed = 10;
+			var direction = 1;
+			box.css('left', position);
+			box.text(points);
+			
+			function update() {
+				// TODO 3 / 6 / 7 / 8
+				position += speed * direction
+				
+				console.log("new position: " + position);
+				
+				if(position > boardWidth) {
+					console.log("Right Wall Hit");
+					direction = -1;
+					console.log(direction);
+					 
+				}
+				if(position < 0) {
+					console.log("Left Wall Hit");
+					direction = 1;
+					console.log(direction);
+				}
+				box.css('left', position);
+				
+			}
+
+
+			
+			function handleBoxClick() {
+				// TODO 4 / 5
+				 points += 1; 
+				 box.text(points);
+				 position = 0;
+				 speed += 3;
+			}
+
+
+			//this executes the update function code every 50 milliseconds
+			setInterval(update, 50);
+			// this executes the handleBoxClick function code every time the box is clicked on
+			box.on('click', handleBoxClick);
+		})();
+	</script>
+</body>
+</html>
